@@ -70,3 +70,27 @@
 // for (let ch of unique) {
 //   console.log(ch, "->", freq_arr[ch.charCodeAt()]);
 // }
+
+// revision =============> 
+// 
+// let s = "unique";
+// 
+// freqCount(s);
+// 
+// function freqCount(s) {
+//   let arr = new Array(128).fill(0);
+//   let unique = [];
+// 
+//   for (let el of s) {
+//     let code = el.charCodeAt();
+//     arr[code] = arr[code] + 1;
+// 
+//     if (arr[code] == 1) {
+//       unique.push(el);
+//     }
+//   }
+// 
+//   for (let el of unique) {
+//     console.log(`${el} appears ${arr[el.charCodeAt()]} times`);
+//   }
+// }
