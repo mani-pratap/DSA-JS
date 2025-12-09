@@ -71,26 +71,195 @@
 //   console.log(ch, "->", freq_arr[ch.charCodeAt()]);
 // }
 
-// revision =============> 
-// 
+// revision =============>
+//
 // let s = "unique";
-// 
+//
 // freqCount(s);
-// 
+//
 // function freqCount(s) {
 //   let arr = new Array(128).fill(0);
 //   let unique = [];
-// 
+//
 //   for (let el of s) {
 //     let code = el.charCodeAt();
 //     arr[code] = arr[code] + 1;
-// 
+//
 //     if (arr[code] == 1) {
 //       unique.push(el);
 //     }
 //   }
-// 
+//
 //   for (let el of unique) {
 //     console.log(`${el} appears ${arr[el.charCodeAt()]} times`);
 //   }
 // }
+
+// Array Rotation using Extra space --------------------------
+
+// ✅ Left Rotation by k – Formula
+//
+// Left rotation me har element ko k steps left move karna hota hai.
+//
+// Formula:
+//
+// temp[i] = arr[(i + k) % n]
+// 🟦 Example
+//
+// arr = [1,2,3,4,5], k = 2
+//
+// Left rotate result: [3,4,5,1,2] ------------
+
+// let arr = [1, 2, 3, 4, 5];
+// let temp = new Array(arr.length);  //extra space
+// let k = 2;  // Kth time rotation
+//
+// k = k % arr.length;  //optimise
+//
+// for (let i = 0; i < arr.length; i++) {
+//   temp[i] = arr[(i + k) % arr.length];  //0+2 = 2 % 5 = 2 => arr[2]
+// }
+//
+// console.log(temp);
+
+// _________ Right Rotaioin -------------with extra space---------
+
+// let arr = [2, 3, 4, 5, 1];
+// //  2 time right rotation >> [5,1,2,3,4]
+//
+// let k = 2;
+//
+// k = k % arr.length;
+// let temp = [];
+//
+// for (let i = 0; i < arr.length; i++) {
+//   temp[i] = arr[(i - k + arr.length) % arr.length];
+// }
+//
+// console.log(temp);
+
+// 🔥 Explanation (short)
+
+// (i - k) = element ko right shift karna  or piche se aage lane k liye
+//
+// + arr.length = negative index avoid
+//
+// % arr.length = circular rotation or array bound exception s bachne k liye
+
+// -------------Left - Rotaion // without extra space------
+//
+// function left_rotaion(arr, k) {
+//   function reverse(i, j) {
+//     while (i < j) {
+//       let temp = arr[i];
+//       arr[i] = arr[j];
+//       arr[j] = temp;
+//
+//       i++;
+//       j--;
+//     }
+//   }
+//
+//   reverse(0, k - 1);
+//   reverse(k, arr.length - 1);
+//   reverse(0, arr.length - 1);
+//
+//   return arr;
+// }
+//
+// arr = [1, 2, 3, 4, 5];
+// k = 2; // 2 time rotaion
+//
+// console.log(`left rotaion of [${arr}] is : `, left_rotaion(arr, k));
+
+// o/p: left rotaion of [1,2,3,4,5] is :  (5) [3, 4, 5, 1, 2]
+// extra space =>
+// temp[i] = arr[(i + k) % arr.length];  //0+2 = 2 % 5 = 2 => arr[2]
+
+// / ------Right-Rotaion // without extra space using pointer ------
+
+// function right_rotaion(arr, k) {
+//   const reverse = (i, j) => {
+//     while (i < j) {
+//       let temp = arr[i];
+//       arr[i] = arr[j];
+//       arr[j] = temp;
+//
+//       i++;
+//       j--;
+//     }
+//   };
+//
+//   // main logic
+//   reverse(0, arr.length - 1);
+//   reverse(0, k - 1);
+//   reverse(k, arr.length - 1);
+//
+//   return arr;
+// }
+//
+// arr = [1, 2, 3, 4, 5];
+// k = 2; // 2 time rotaion
+//
+// console.log(`Right rotaion of [${arr}] is : `, right_rotaion(arr, k));
+
+// o/p :
+// Right rotaion of [1,2,3,4,5] is :  (5) [4, 5, 1, 2, 3]
+
+// <-- extra space =>
+//  temp[i] = arr[(i - k + arr.length) % arr.length];
+
+// -------------Count unique Element in Array /Remove duplicate Element in sorted Array --------------
+
+// function Unique_Array(arr) {
+//   let j = 1;
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     if (arr[i] != arr[i + 1]) {
+//       arr[j] = arr[i + 1];
+//       j++;
+//     }
+//   }
+//
+//   return { arr, j };
+// }
+//
+// let arr = [0, 1, 1, 2, 2, 3, 4, 5];
+// let result = Unique_Array(arr);
+//
+// console.log(
+//   `[${arr}] remove duplicate : ${result.arr} and unique Element ${result.j}`
+// );
+
+// o/p : [0,1,2,3,4,5,4,5] remove duplicate : 0,1,2,3,4,5,4,5 and unique Element 6
+
+// 2 pointer hoye h j tab badta h jab unique element milta h , first element ko unique man k chalte h
+// isliye j =1 s start karte arr[0] already uniqur h
+// arr[j] = arr[0+1..] >> return m j karte to hame proper unique element k ciunt bhi mil jata h
+
+// Merge sorted Array
+
+// let arr1 = [1, 2, 5, 6];
+// let arr2 = [1, 3, 4, 8];
+// let merge = [];
+// 
+// let i = (j = k = 0);
+// 
+// while (i < arr1.length && j < arr2.length) {
+//   if (arr1[i] < arr2[j]) {
+//     merge[k] = arr1[i];
+//     k++, i++;
+//   } else {
+//     merge[k] = arr2[j];
+//     k++, j++;
+//   }
+// }
+// 
+// while (i < arr1.length) {
+//   merge[k++] = arr1[i++];
+// }
+// while (j < arr2.length) {
+//   merge[k++] = arr2[j++];
+// }
+// console.log(merge);
+
+//0/0 :  (8) [1, 1, 2, 3, 4, 5, 6, 8]   //non-decrement bcoz
