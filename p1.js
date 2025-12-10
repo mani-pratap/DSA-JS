@@ -241,9 +241,9 @@
 // let arr1 = [1, 2, 5, 6];
 // let arr2 = [1, 3, 4, 8];
 // let merge = [];
-// 
+//
 // let i = (j = k = 0);
-// 
+//
 // while (i < arr1.length && j < arr2.length) {
 //   if (arr1[i] < arr2[j]) {
 //     merge[k] = arr1[i];
@@ -253,7 +253,7 @@
 //     k++, j++;
 //   }
 // }
-// 
+//
 // while (i < arr1.length) {
 //   merge[k++] = arr1[i++];
 // }
@@ -263,3 +263,89 @@
 // console.log(merge);
 
 //0/0 :  (8) [1, 1, 2, 3, 4, 5, 6, 8]   //non-decrement bcoz
+
+//121. Best Time to Buy and Sell Stock ------------------------
+// Input: prices = [7, 1, 5, 3, 6, 4];
+// Output: 5;
+//
+// /**
+//  * @param {number[]} prices
+//  * @return {number}
+//  */
+// var maxProfit = function(prices) {
+//     let maxprofit = 0;
+//     let min=prices[0];  //7
+//     for (let i=1;i<prices.length;i++){ //prices[i] => 1, 5,3,6
+//         if(prices[i]<min) min = prices[i];   // min => 1
+//         let profit = prices[i] - min;  //0,4,2,5
+//         if(profit>maxprofit) maxprofit=profit  //maxprofit => 0,4,5
+//     }
+//     return maxprofit
+// };
+
+// Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue.
+//
+// We will use the integers 0, 1, and 2 to represent the color red, white, and blue, respectively.
+
+// Example 1:
+//
+// Input: nums = [2,0,2,1,1,0]
+// Output: [0,0,1,1,2,2]
+//
+// /**
+//  * @param {number[]} nums  = [0,0,2,1,1,2]
+//  * @return {void} Do not return anything, modify nums in-place instead.
+//  */
+//
+// // [2,0,1] => [1,0,2] => [0,1,2]
+//
+// var sortColors = function(nums) {
+//     let j=0   // 0,1
+//     let k=nums.length-1; //2,1
+//
+//     for(let i=0;i<=k;i++){   //i => 0,0,1,2#
+//         if(nums[i]==0){
+//             // swapping
+//             [nums[i],nums[j]] = [nums[j],nums[i]]
+//             j++
+//         }else if(nums[i] == 2){
+//             // swapping
+//             [nums[i],nums[k]] = [nums[k],nums[i]]
+//             k--
+//             i--  // -1
+//         }
+//     }
+// };
+
+// -----------------------------
+//
+// 53. Maximum Subarray
+// Solved
+// Medium
+// Topics
+// premium lock icon
+// Companies
+// Given an integer array nums, find the subarray with the largest sum, and return its sum.
+//
+// Example 1:
+//
+// Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+// Output: 6
+// Explanation: The subarray [4,-1,2,1] has the largest sum 6.
+// Example 2:
+
+// /**
+//  * @param {number[]} nums
+//  * @return {number}
+//  */
+// var maxSubArray = function (nums) {
+//   let sum = 0;
+//   let maxSum = -Infinity;
+//
+//   for (i = 0; i < nums.length; i++) {
+//     sum = sum + nums[i];
+//     if (sum > maxSum) maxSum = sum;
+//     if (sum < 0) sum = 0;
+//   }
+//   return maxSum;
+// };
